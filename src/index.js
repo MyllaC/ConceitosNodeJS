@@ -71,7 +71,7 @@ app.post("/todos", checksExistsUserAccount, (request, response) => {
 app.put("/todos/:id", checksExistsUserAccount, (request, response) => {
   const { user } = request;
   const { title, deadline } = request.body;
-  const { id } = request.params;
+  const { id } = request.params; //pegar o id que está dentro do array todos
 
   const checkTodo = user.todos.find((todo) => todo.id === id);
 
@@ -110,7 +110,7 @@ app.delete("/todos/:id", checksExistsUserAccount, (request, response) => {
     return response.status(404).json({ error: "Todo not found" });
   }
 
-  user.todos.splice(todoIndex, 1);
+  user.todos.splice(todoIndex, 1); //primeiro argumento é o index que eu quero começar a deletar e o segundo são quantos eu vou deletar, como colequei um só vai deletar o todo do index que estou mandando
 
   return response.status(204).send();
 });
